@@ -5,3 +5,7 @@
 
 ## Build
 `npm run build`
+
+
+### TODO
+> React Hot Module Replacement
