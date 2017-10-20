@@ -6,22 +6,20 @@ const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 
 const paths = {
-  dist: path.resolve(__dirname, 'dist'),
-  client: path.resolve(__dirname, 'client'),
-  js: path.resolve(__dirname, 'client', 'js'),
-  clientDist: path.resolve(__dirname, 'build'),
+  src: path.join(__dirname, 'client'),
+  js: path.join(__dirname, 'client', 'js'),
+  dist: path.join(__dirname, 'build'),
 };
 
-// Webpack configuration
 module.exports = {
   entry: {
     app: path.join(paths.js, 'app.jsx'),
     vendor: ['react'],
   },
   output: {
-    path: paths.clientDist,
+    path: paths.dist,
     filename: '[name].bundle.[chunkhash].js',
-    publicPath: paths.clientDist,
+    publicPath: './',
   },
   module: {
     rules: [
@@ -66,7 +64,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(paths.client, 'index.html'),
+      template: path.join(paths.src, 'index.html'),
     }),
     new ExtractTextPlugin('style.css'),
     new webpack.optimize.CommonsChunkPlugin({
