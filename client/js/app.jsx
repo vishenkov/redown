@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { render } from 'react-dom';
 
-import '../css/style.css';
+import '../css/style.scss';
 
 class Hello extends Component {
   static propTypes = {

@@ -1,25 +1,30 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 
 const paths = {
   dist: path.resolve(__dirname, 'dist'),
   client: path.resolve(__dirname, 'client'),
-  js: path.resolve(__dirname, 'client/js'),
-  clientDist: path.resolve(__dirname, 'public'),
+  js: path.resolve(__dirname, 'client', 'js'),
+  clientDist: path.resolve(__dirname, 'build'),
 };
 
 // Webpack configuration
 module.exports = {
-  entry: path.join(paths.js, 'app.jsx'),
+  entry: {
+    app: path.join(paths.js, 'app.jsx'),
+    vendor: ['react'],
+  },
   output: {
     path: paths.clientDist,
-    filename: 'app.bundle.js'
+    filename: '[name].bundle.[hash].js',
+    publicPath: paths.clientDist,
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -28,22 +33,19 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpe?g|gif|svg)$/,
         use: [
           'file-loader',
         ],
       },
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
+        test: /\.s?css$/,
+        loader: ExtractTextPlugin.extract(
+          [{
             loader: 'css-loader',
             options: {
               modules: true,
-              importLoaders: 1,
-              localIdentName: "[local]__[hash:base64:5]",
-              minimize: false
+              minimize: true
             }
           },
           {
@@ -55,7 +57,7 @@ module.exports = {
               ]
             }
           },
-        ]
+        ]),
       }
     ],
   },
@@ -66,5 +68,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(paths.client, 'index.html'),
     }),
+    new ExtractTextPlugin('style.css'),
   ],
 };

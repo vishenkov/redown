@@ -10,6 +10,7 @@ flow-typed
 .tern-port
 *.sqlite
 public
+build
 
 # OS
 .DS_Store
