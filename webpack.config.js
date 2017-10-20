@@ -20,7 +20,7 @@ module.exports = {
   },
   output: {
     path: paths.clientDist,
-    filename: '[name].bundle.[hash].js',
+    filename: '[name].bundle.[chunkhash].js',
     publicPath: paths.clientDist,
   },
   module: {
@@ -69,5 +69,8 @@ module.exports = {
       template: path.join(paths.client, 'index.html'),
     }),
     new ExtractTextPlugin('style.css'),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+    }),
   ],
 };
