@@ -12,15 +12,13 @@ const paths = {
 };
 
 module.exports = {
-  entry: [
-    'webpack-hot-middleware/client?reload=true',
-    'react-hot-loader/patch',
-    './client/js/index.jsx',
-  ],
-  devtool: 'inline-source-map',
+  entry: {
+    app: path.join(paths.js, 'app.jsx'),
+    vendor: ['react'],
+  },
   output: {
     path: paths.dist,
-    filename: 'bundle.js',
+    filename: '[name].bundle.[chunkhash].js',
     publicPath: './',
   },
   module: {
@@ -40,27 +38,23 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 1,
-              localIdentName: '[local]__[hash:base64:5]',
-              minimize: false,
-            },
+        loader: ExtractTextPlugin.extract([{
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            minimize: true,
           },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: [
-                precss,
-                autoprefixer,
-              ],
-            },
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            plugins: [
+              precss,
+              autoprefixer,
+            ],
           },
-        ],
+        },
+        ]),
       },
     ],
   },
@@ -72,7 +66,8 @@ module.exports = {
       template: path.join(paths.src, 'index.html'),
     }),
     new ExtractTextPlugin('style.css'),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+    }),
   ],
 };

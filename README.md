@@ -1,11 +1,11 @@
-# React base setup boilerplate
+# React boilerplate
+> Base starter kit with React hot module replacement and koa backend
 
-## Setup
-`npm run start`
+## Start development server
+`make start-dev`
 
 ## Build
-`npm run build`
+`make build`
 
-
-### TODO
-> React Hot Module Replacement
+## Test
+`make test`
