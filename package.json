@@ -1,7 +1,7 @@
 {
-  "name": "react-boilerplate",
-  "version": "1.0.0",
-  "description": "base setup for React app",
+  "name": "redown",
+  "version": "0.0.1",
+  "description": "react based markup editor",
   "main": "dist/index.js",
   "scripts": {
     "babel-node": "babel-node",
@@ -28,7 +28,7 @@
   "author": "Kirill Vishenkov <vishkir1991@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vishenkov/react-boilerplate.git"
+    "url": "git+https://github.com/vishenkov/redown.git"
   },
   "license": "ISC",
   "devDependencies": {

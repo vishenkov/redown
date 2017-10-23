@@ -1,6 +1,5 @@
-# React boilerplate
-> Base starter kit with React hot module replacement and koa backend
-
+# Redown
+> markup editor
 ## Start development server
 `make start-dev`
 
