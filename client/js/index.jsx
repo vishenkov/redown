@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
-import App from './App';
+import app from './app';
 
 const render = (Component) => {
   ReactDOM.render(
@@ -13,13 +13,13 @@ const render = (Component) => {
   );
 };
 
-render(App);
+render(app);
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./App', () => {
+  module.hot.accept('./app', () => {
     // eslint-disable-next-line
-    require('./App');
-    render(App);
+    require('./app');
+    render(app);
   });
 }

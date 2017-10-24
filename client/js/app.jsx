@@ -1,6 +1,6 @@
 import React from 'react';
-import Hello from './Hello';
+import MarkdownEditor from './MarkdownEditor';
 
 export default () => (
-  <Hello name="world" />
+  <MarkdownEditor />
 );
